@@ -21,8 +21,29 @@
         <a href="/">
             <button class="px-2 py-1 rounded-md bg-blue-400 hover:bg-blue-500">Retornar</button>
         </a>
+        <div class="font-semibold text-lg">
+            Caso algum erro tenha ocorrido e precise refazer a última ordem, clique abaixo:
+        </div>
+        <button id="rerun" class="px-2 py-1 rounded-md bg-blue-400 hover:bg-blue-500">Refazer
+            Último(a) {{ last_system }}</button>
+        <pre class="overflow-auto">
+            {{ last_data }}
+        </pre>
     </div>
-
 </main>
+<script>
+    const lastSystem = "{{ last_system }}"
+    const lastData = "{{ last_data }}".replaceAll("&#39;", "\"")
+
+    document.querySelector("#rerun").addEventListener("click", () => {
+        fetch(`/action/${lastSystem}/execute`, {
+            method: "POST",
+            headers: {"content-type": "application/json"},
+            body: lastData
+        })
+            .catch(err => console.log(err))
+            .finally(() => window.location.href = "/action/queued")
+    })
+</script>
 </body>
 </html>
