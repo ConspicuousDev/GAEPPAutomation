@@ -383,7 +383,6 @@ def renajud(data):
                 raise AssertionError("Certificate not authenticated:", driver.current_url)
     except AssertionError:
         pass
-    wait_for_page_load(driver, "https://renajud.denatran.serpro.gov.br/renajud/restrito/index.jsf")
     print(f"[EXECUTE] [renajud] certificate authentication successful")
     total_execs = len(data["pesquisados"])
     for i, execs in enumerate(data["pesquisados"]):
@@ -478,7 +477,8 @@ def renajud(data):
             eligible_count += 1
         print(f"[EXECUTE] [renajud] {execs['cpf_cnpj']} returned {eligible_count} eligible vehicles")
         if i + 1 < len(data["pesquisados"]):
-            input("[EXECUTE] [renajud] press ENTER to continue...")
+            print("[EXECUTE] [renajud] press ENTER to continue...")
+            input()
     print(f"[EXECUTE] [renajud] finished successfully")
 
 
