@@ -82,14 +82,14 @@ def extract(system):
         data = {}
     elif system.lower() == "sisbajud":
         prompt = (
-            "Você deve extrair as seguintes informações do mandado a seguir no seguinte formato (os valores são apenas exemplos com instruções). Caso você não encontre algum dos valores, não inclua a chave (caso seja uma lista, deixe a lista vazia)."
+            "Você deve extrair as seguintes informações da ordem de pesquisa a seguir no seguinte formato (os valores são apenas exemplos com instruções). Caso você não encontre algum dos valores, não inclua a chave (caso seja uma lista, deixe a lista vazia)."
             "{"
             "   \"vara\": \"1ª VARA DO TRABALHO DE CIDADE\","
             "   \"numero_mandado\": \"012345-67.8901.2.34.5678\","
             "   \"autor\": \"NOME DO AUTOR (COMO NO CABEÇALHO)\","
             "   \"pesquisados\": ["
             "       {"
-            "           \"cpf_cnpj\": \"012.345.678-90 ou 01.234.567/0001-89\""
+            "           \"cpf_cnpj\": \"012.345.678-90 ou 01.234.567/0001-89 (NÃO INCLUA O EXEQUENTE NESSA LISTA)\""
             "       }"
             "   ],"
             "   \"valor_pesquisa\": \"R$ 1.234,56\" (VALOR TOTAL)"
@@ -138,13 +138,13 @@ def extract(system):
         data = eval(extracted_data)
     elif system.lower() == "cnib_incluir":
         prompt = (
-            "Você deve extrair as seguintes informações do mandado a seguir no seguinte formato (os valores são apenas exemplos com instruções). Caso você não encontre algum dos valores, não inclua a chave (caso seja uma lista, deixe a lista vazia)."
+            "Você deve extrair as seguintes informações da ordem de pesquisa a seguir no seguinte formato (os valores são apenas exemplos com instruções). Caso você não encontre algum dos valores, não inclua a chave (caso seja uma lista, deixe a lista vazia)."
             "{"
             "   \"numero_mandado\": \"012345-67.8901.2.34.5678\","
             "   \"executado\": \"NOME DO EXECUTADO (COMO NO CABEÇALHO, COM 'E OUTROS X')\","
             "   \"pesquisados\": ["
             "       {"
-            "           \"cpf_cnpj\": \"012.345.678-90 ou 01.234.567/0001-89\""
+            "           \"cpf_cnpj\": \"012.345.678-90 ou 01.234.567/0001-89 (NÃO INCLUA O EXEQUENTE NESSA LISTA)\""
             "       }"
             "   ],"
             "   \"valor_pesquisa\": \"R$ 1.234,56\" (VALOR TOTAL)"
@@ -164,11 +164,11 @@ def extract(system):
         data = eval(extracted_data)
     elif system.lower() == "renajud":
         prompt = (
-            "Você deve extrair as seguintes informações do mandado a seguir no seguinte formato (os valores são apenas exemplos com instruções). Caso você não encontre algum dos valores, não inclua a chave (caso seja uma lista, deixe a lista vazia)."
+            "Você deve extrair as seguintes informações da ordem de pesquisa a seguir no seguinte formato (os valores são apenas exemplos com instruções). Caso você não encontre algum dos valores, não inclua a chave (caso seja uma lista, deixe a lista vazia)."
             "{"
             "   \"pesquisados\": ["
             "       {"
-            "           \"cpf_cnpj\": \"012.345.678-90 ou 01.234.567/0001-89\""
+            "           \"cpf_cnpj\": \"012.345.678-90 ou 01.234.567/0001-89 (NÃO INCLUA O EXEQUENTE NESSA LISTA)\""
             "       }"
             "   ],"
             "}")
