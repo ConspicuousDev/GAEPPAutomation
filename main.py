@@ -109,7 +109,7 @@ def extract(system):
         data = eval(extracted_data)
     elif system.lower() == "serasa_2":
         prompt = (
-            "Você deve extrair as seguintes informações do mandado a seguir no seguinte formato (os valores são apenas exemplos com instruções). Caso você não encontre algum dos valores, não inclua a chave (caso seja uma lista, deixe a lista vazia)."
+            "Você deve extrair as seguintes informações da ordem de pesquisa a seguir no seguinte formato (os valores são apenas exemplos com instruções). Caso você não encontre algum dos valores, não inclua a chave (caso seja uma lista, deixe a lista vazia)."
             "{"
             "   \"numero_mandado\": \"012345-67.8901.2.34.5678\","
             "   \"autor\": \"NOME DO AUTOR (COMO NO CABEÇALHO)\","
@@ -117,7 +117,7 @@ def extract(system):
             "   \"executado_cpf_cnpj\": \"012.345.678-90 ou 01.234.567/0001-89 (DO EXECUTADO PRINCIPAL DO CABEÇALHO)\""
             "   \"pesquisados\": ["
             "       {"
-            "           \"nome\": \"NOME DO EXECUTADO A SER PESQUISADO\","
+            "           \"nome\": \"NOME DO EXECUTADO A SER PESQUISADO (NÃO INCLUA O EXEQUENTE NESSA LISTA)\","
             "           \"cpf_cnpj\": \"012.345.678-90 ou 01.234.567/0001-89\""
             "       }"
             "   ],"
@@ -355,12 +355,16 @@ def cnib_incluir(data):
     for execs in data["pesquisados"]:
         cpf_cnpj = execs["cpf_cnpj"]
         if len(re.sub(r"\D", "", cpf_cnpj)) == 11:
-            wait_for_element(driver, '/html/body/div[1]/div[2]/div[5]/div/input[1]').click()
+            driver.execute_script("arguments[0].click();",
+                                  wait_for_element(driver, '/html/body/div[1]/div[2]/div[5]/div/input[1]'))
         else:
-            wait_for_element(driver, '/html/body/div[1]/div[2]/div[5]/div/input[2]').click()
+            driver.execute_script("arguments[0].click();",
+                                  wait_for_element(driver, '/html/body/div[1]/div[2]/div[5]/div/input[2]'))
         wait_for_element(driver, '/html/body/div[1]/div[2]/div[5]/div/input[3]').send_keys(cpf_cnpj)
         wait_for_element(driver, '/html/body/div[1]/div[2]/div[5]/div/button[1]').click()
         wait_for_element(driver, '/html/body/div[1]/div[2]/div[5]/div/button[2]').click()
+        driver.execute_script("arguments[0].click();",
+                              wait_for_element(driver, "/html/body/div[1]/div[2]/div[5]/center/button[1]"))
         time.sleep(.5)
     print(f"[EXECUTE] [cnib_incluir] finished successfully")
 
